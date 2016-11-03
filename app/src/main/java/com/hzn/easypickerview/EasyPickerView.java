@@ -277,7 +277,7 @@ public class EasyPickerView extends View {
             if (nowIndex >= 0 && nowIndex < dataList.size())
                 curIndex = nowIndex;
             else if (nowIndex < 0)
-                curIndex = dataList.size() + nowIndex % dataList.size();
+                curIndex = dataList.size() - 1 + (nowIndex + 1) % dataList.size();
             else if (nowIndex > dataList.size() - 1)
                 curIndex = nowIndex % dataList.size();
         } else {
