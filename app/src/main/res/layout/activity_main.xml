@@ -19,7 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:textColor="#8f8f8f"
         />
 
     <LinearLayout
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="70dp"
-            android:text="时"
+            android:text="h"
             android:textColor="#4aa4a4"
             android:textSize="20sp"
             />
@@ -72,9 +73,88 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="70dp"
-            android:text="分"
+            android:text="m"
             android:textColor="#e98d3c"
             android:textSize="20sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/et_h"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:hint="h"
+            android:inputType="numberSigned"
+            android:textColor="#4aa4a4"
+            android:textColorHint="#dedede"
+            />
+
+        <Button
+            android:id="@+id/btn_to_h"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="#4aa4a4"
+            android:text="move to"
+            android:textColor="#ffffff"
+            />
+
+        <Button
+            android:id="@+id/btn_by_h"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="#4aa4a4"
+            android:minHeight="0dp"
+            android:text="move by"
+            android:textColor="#ffffff"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/et_m"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:hint="m"
+            android:inputType="numberSigned"
+            android:textColor="#4aa4a4"
+            android:textColorHint="#dedede"
+            />
+
+        <Button
+            android:id="@+id/btn_to_m"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="#e98d3c"
+            android:text="move to"
+            android:textColor="#ffffff"
+            />
+
+        <Button
+            android:id="@+id/btn_by_m"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="#e98d3c"
+            android:text="move by"
+            android:textColor="#ffffff"
             />
     </LinearLayout>
 </LinearLayout>

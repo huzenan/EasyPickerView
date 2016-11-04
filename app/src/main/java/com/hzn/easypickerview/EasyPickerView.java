@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -254,7 +255,7 @@ public class EasyPickerView extends View {
                 offsetIndex = i;
 
                 if (null != onScrollChangedListener)
-                    onScrollChangedListener.onScrollChanged(getNowIndex());
+                    onScrollChangedListener.onScrollChanged(getNowIndex(-offsetIndex));
             }
             postInvalidate();
         } else {
@@ -272,22 +273,7 @@ public class EasyPickerView extends View {
             --offsetIndex;
 
         // 重置curIndex
-        int nowIndex = curIndex - offsetIndex;
-        if (isRecycleMode) {
-            if (nowIndex >= 0 && nowIndex < dataList.size())
-                curIndex = nowIndex;
-            else if (nowIndex < 0)
-                curIndex = dataList.size() - 1 + (nowIndex + 1) % dataList.size();
-            else if (nowIndex > dataList.size() - 1)
-                curIndex = nowIndex % dataList.size();
-        } else {
-            if (nowIndex >= 0 && nowIndex < dataList.size())
-                curIndex = nowIndex;
-            else if (nowIndex < 0)
-                curIndex = 0;
-            else if (nowIndex > dataList.size() - 1)
-                curIndex = dataList.size() - 1;
-        }
+        curIndex = getNowIndex(-offsetIndex);
 
         // 计算回弹的距离
         bounceDistance = offsetIndex * centerPadding - offsetY;
@@ -298,17 +284,22 @@ public class EasyPickerView extends View {
             onScrollChangedListener.onScrollFinished(curIndex);
 
         // 重绘
-        postInvalidate();
         reset();
+        postInvalidate();
     }
 
-    private int getNowIndex() {
-        int index = curIndex - offsetIndex;
+    private int getNowIndex(int offsetIndex) {
+        int index = curIndex + offsetIndex;
         if (isRecycleMode) {
             if (index < 0)
                 index = (index + 1) % dataList.size() + dataList.size() - 1;
             else if (index > dataList.size() - 1)
                 index = index % dataList.size();
+        } else {
+            if (index < 0)
+                index = 0;
+            else if (index > dataList.size() - 1)
+                index = dataList.size() - 1;
         }
         return index;
     }
@@ -349,6 +340,54 @@ public class EasyPickerView extends View {
      */
     public int getCurIndex() {
         return curIndex - offsetIndex;
+    }
+
+    /**
+     * 滚动到指定位置
+     *
+     * @param index 需要滚动到的指定位置
+     */
+    public void moveTo(int index) {
+        if (index < 0 || index >= dataList.size() || curIndex == index)
+            return;
+
+        if (!scroller.isFinished())
+            scroller.forceFinished(true);
+
+        finishScroll();
+
+        int dy = 0;
+        int centerPadding = textHeight + textPadding;
+        if (!isRecycleMode) {
+            dy = (curIndex - index) * centerPadding;
+        } else {
+            int offsetIndex = curIndex - index;
+            int d1 = Math.abs(offsetIndex) * centerPadding;
+            int d2 = (dataList.size() - Math.abs(offsetIndex)) * centerPadding;
+
+            if (offsetIndex > 0) {
+                if (d1 < d2)
+                    dy = d1; // ascent
+                else
+                    dy = -d2; // descent
+            } else {
+                if (d1 < d2)
+                    dy = -d1; // descent
+                else
+                    dy = d2; // ascent
+            }
+        }
+        scroller.startScroll(0, 0, 0, dy, 500);
+        invalidate();
+    }
+
+    /**
+     * 滚动指定的偏移量
+     *
+     * @param offsetIndex 指定的偏移量
+     */
+    public void moveBy(int offsetIndex) {
+        moveTo(getNowIndex(offsetIndex));
     }
 
     /**
