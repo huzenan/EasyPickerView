@@ -19,8 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:textSize="20sp"
         android:textColor="#8f8f8f"
+        android:textSize="20sp"
         />
 
     <LinearLayout
@@ -30,11 +30,12 @@
         >
 
         <com.hzn.easypickerview.EasyPickerView
-            android:id="@+id/cpv1"
+            android:id="@+id/epv_h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            custom:epvMaxShowNum="3"
             custom:epvRecycleMode="true"
             custom:epvTextColor="#4aa4a4"
             custom:epvTextMaxScale="2.0"
@@ -54,12 +55,13 @@
             />
 
         <com.hzn.easypickerview.EasyPickerView
-            android:id="@+id/cpv2"
+            android:id="@+id/epv_m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            custom:epvMaxShowNum="3"
             custom:epvRecycleMode="false"
             custom:epvTextColor="#e98d3c"
             custom:epvTextMaxScale="2.0"

@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private int hour;
     private int minute;
     private TextView tv;
-    private EasyPickerView cpvH;
-    private EasyPickerView cpvM;
+    private EasyPickerView epvH;
+    private EasyPickerView epvM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initHours() {
-        cpvH = (EasyPickerView) findViewById(R.id.cpv1);
+        epvH = (EasyPickerView) findViewById(R.id.epv_h);
         final ArrayList<String> hDataList = new ArrayList<>();
         for (int i = 0; i < 24; i++)
             hDataList.add("" + i);
 
-        cpvH.setDataList(hDataList);
-        cpvH.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
+        epvH.setDataList(hDataList);
+        epvH.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
             @Override
             public void onScrollChanged(int curIndex) {
                 hour = Integer.parseInt(hDataList.get(curIndex));
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initMinutes() {
-        cpvM = (EasyPickerView) findViewById(R.id.cpv2);
+        epvM = (EasyPickerView) findViewById(R.id.epv_m);
         final ArrayList<String> dataList2 = new ArrayList<>();
         for (int i = 0; i < 60; i++)
             dataList2.add("" + i);
 
-        cpvM.setDataList(dataList2);
-        cpvM.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
+        epvM.setDataList(dataList2);
+        epvM.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
             @Override
             public void onScrollChanged(int curIndex) {
                 minute = Integer.parseInt(dataList2.get(curIndex));
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(et_h.getText())) {
                     int index = Integer.parseInt(et_h.getText().toString());
-                    cpvH.moveTo(index);
+                    epvH.moveTo(index);
                 }
             }
         });
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(et_h.getText())) {
                     int index = Integer.parseInt(et_h.getText().toString());
-                    cpvH.moveBy(index);
+                    epvH.moveBy(index);
                 }
             }
         });
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(et_m.getText())) {
                     int index = Integer.parseInt(et_m.getText().toString());
-                    cpvM.moveTo(index);
+                    epvM.moveTo(index);
                 }
             }
         });
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(et_m.getText())) {
                     int index = Integer.parseInt(et_m.getText().toString());
-                    cpvM.moveBy(index);
+                    epvM.moveBy(index);
                 }
             }
         });

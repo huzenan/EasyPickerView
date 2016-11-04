@@ -35,6 +35,8 @@ public class EasyPickerView extends View {
     private float textMinAlpha;
     // 是否循环模式，默认是
     private boolean isRecycleMode;
+    // 正常状态下最多显示几个文字，默认3（偶数时，边缘的文字会截断）
+    private int maxShowNum;
 
     private TextPaint textPaint;
     private Paint.FontMetrics fm;
@@ -95,6 +97,7 @@ public class EasyPickerView extends View {
         textMaxScale = a.getFloat(R.styleable.EasyPickerView_epvTextMaxScale, 2.0f);
         textMinAlpha = a.getFloat(R.styleable.EasyPickerView_epvTextMinAlpha, 0.4f);
         isRecycleMode = a.getBoolean(R.styleable.EasyPickerView_epvRecycleMode, true);
+        maxShowNum = a.getInteger(R.styleable.EasyPickerView_epvMaxShowNum, 3);
         a.recycle();
 
         textPaint = new TextPaint();
@@ -121,9 +124,9 @@ public class EasyPickerView extends View {
         mode = MeasureSpec.getMode(heightMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
         textHeight = (int) (fm.bottom - fm.top);
-        contentHeight = textHeight * 3 + textPadding * 3 + getPaddingTop() + getPaddingBottom();
+        contentHeight = textHeight * maxShowNum + textPadding * maxShowNum;
         if (mode != MeasureSpec.EXACTLY) { // wrap_content
-            height = contentHeight;
+            height = contentHeight + getPaddingTop() + getPaddingBottom();
         }
 
         cx = width / 2;
@@ -181,7 +184,8 @@ public class EasyPickerView extends View {
             // 绘制文字，从当前中间项往前2个开始，往后一共绘制5个字
             int size = dataList.size();
             int centerPadding = textHeight + textPadding;
-            for (int i = -2; i < 3; i++) {
+            int half = maxShowNum / 2 + 1;
+            for (int i = -half; i <= half; i++) {
                 int index = curIndex - offsetIndex + i;
 
                 if (isRecycleMode) {

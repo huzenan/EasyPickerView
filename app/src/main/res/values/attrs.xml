@@ -7,5 +7,6 @@
         <attr name="epvTextMaxScale" format="float"/>
         <attr name="epvTextMinAlpha" format="float"/>
         <attr name="epvRecycleMode" format="boolean"/>
+        <attr name="epvMaxShowNum" format="integer"/>
     </declare-styleable>
 </resources>
