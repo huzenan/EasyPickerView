@@ -2,7 +2,8 @@
 A light PickerView for Android.
 
 ## ScreenShots
-![EasyPickerView](https://github.com/huzenan/EasyPickerView/blob/master/screenshots/pickerview.PNG)
+![picker](https://github.com/huzenan/EasyPickerView/blob/master/screenshots/picker.gif) 
+![scale](https://github.com/huzenan/EasyPickerView/blob/master/screenshots/scale.gif)
 
 ## Usage
 >layout
