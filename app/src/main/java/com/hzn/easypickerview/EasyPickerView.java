@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -164,6 +163,15 @@ public class EasyPickerView extends View {
                 } else {
                     finishScroll();
                 }
+
+                // 没有滑动，则判断点击事件
+                if (!isSliding) {
+                    if (downY < contentHeight / 3)
+                        moveBy(-1);
+                    else if (downY > 2 * contentHeight / 3)
+                        moveBy(1);
+                }
+
                 isSliding = false;
                 recycleVelocityTracker();
                 break;
