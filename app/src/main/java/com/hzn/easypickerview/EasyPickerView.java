@@ -195,7 +195,7 @@ public class EasyPickerView extends View {
                     cy + contentHeight / 2
             );
 
-            // 绘制文字，从当前中间项往前2个开始，往后一共绘制5个字
+            // 绘制文字，从当前中间项往前、后一共绘制maxShowNum个字
             int size = dataList.size();
             int centerPadding = textHeight + textPadding;
             int half = maxShowNum / 2 + 1;
@@ -220,8 +220,10 @@ public class EasyPickerView extends View {
                     // 根据textMaxScale，计算出tempScale值，即实际text应该放大的倍数，范围 1~textMaxScale
                     float tempScale = scale * (textMaxScale - 1.0f) + 1.0f;
                     tempScale = tempScale < 1.0f ? 1.0f : tempScale;
+                    float tempAlpha = (tempScale - 1) / (textMaxScale - 1);
+                    float textAlpha = (1 - textMinAlpha) * tempAlpha + textMinAlpha;
                     textPaint.setTextSize(textSize * tempScale);
-                    textPaint.setAlpha((int) (255 * textMinAlpha * tempScale));
+                    textPaint.setAlpha((int) (255 * textAlpha));
 
                     // 绘制
                     Paint.FontMetrics tempFm = textPaint.getFontMetrics();
