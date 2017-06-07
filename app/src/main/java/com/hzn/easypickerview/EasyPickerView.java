@@ -115,7 +115,7 @@ public class EasyPickerView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int mode = MeasureSpec.getMode(widthMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        contentWidth = (int) (maxTextWidth + getPaddingLeft() + getPaddingRight());
+        contentWidth = (int) (maxTextWidth * textMaxScale + getPaddingLeft() + getPaddingRight());
         if (mode != MeasureSpec.EXACTLY) { // wrap_content
             width = contentWidth;
         }
@@ -349,6 +349,7 @@ public class EasyPickerView extends View {
             curIndex = 0;
         }
         requestLayout();
+        invalidate();
     }
 
     /**
