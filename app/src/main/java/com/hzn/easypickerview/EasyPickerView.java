@@ -220,8 +220,14 @@ public class EasyPickerView extends View {
                     // 根据textMaxScale，计算出tempScale值，即实际text应该放大的倍数，范围 1~textMaxScale
                     float tempScale = scale * (textMaxScale - 1.0f) + 1.0f;
                     tempScale = tempScale < 1.0f ? 1.0f : tempScale;
-                    float tempAlpha = (tempScale - 1) / (textMaxScale - 1);
-                    float textAlpha = (1 - textMinAlpha) * tempAlpha + textMinAlpha;
+
+                    // 计算文字alpha值
+                    float textAlpha = textMinAlpha;
+                    if (textMaxScale != 1) {
+                        float tempAlpha = (tempScale - 1) / (textMaxScale - 1);
+                        textAlpha = (1 - textMinAlpha) * tempAlpha + textMinAlpha;
+                    }
+
                     textPaint.setTextSize(textSize * tempScale);
                     textPaint.setAlpha((int) (255 * textAlpha));
 
