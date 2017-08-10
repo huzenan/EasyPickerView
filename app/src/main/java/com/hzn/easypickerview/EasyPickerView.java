@@ -104,6 +104,7 @@ public class EasyPickerView extends View {
         textPaint.setTextSize(textSize);
         textPaint.setAntiAlias(true);
         fm = textPaint.getFontMetrics();
+        textHeight = (int) (fm.bottom - fm.top);
 
         scroller = new Scroller(context);
         minimumVelocity = ViewConfiguration.get(getContext()).getScaledMinimumFlingVelocity();
@@ -122,7 +123,6 @@ public class EasyPickerView extends View {
 
         mode = MeasureSpec.getMode(heightMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        textHeight = (int) (fm.bottom - fm.top);
         contentHeight = textHeight * maxShowNum + textPadding * maxShowNum;
         if (mode != MeasureSpec.EXACTLY) { // wrap_content
             height = contentHeight + getPaddingTop() + getPaddingBottom();
