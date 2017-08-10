@@ -366,7 +366,7 @@ public class EasyPickerView extends View {
      * @return 选中的下标
      */
     public int getCurIndex() {
-        return curIndex - offsetIndex;
+        return getNowIndex(-offsetIndex);
     }
 
     /**
